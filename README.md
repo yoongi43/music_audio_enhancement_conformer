@@ -32,7 +32,7 @@ This repository is the implementation of the paper "Exploiting Time-Frequency Co
 |  + reverb_samples_16000_hz.npz
 ```
 
-## Train code
+## Training code
 - Set your configurations in configs/exp{num}.yaml
 - Especially, set the dataset directiory in the configuration file.
   - `data_rootdir = '/path/to/data/dirs/'`
