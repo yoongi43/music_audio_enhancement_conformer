@@ -257,11 +257,5 @@ if __name__=='__main__':
     parser.add_argument('--save-dir', type=str, default=None, help='path to save')
     args = parser.parse_args()
     
-    os.environ['CUDA_VISIBLE_DEVICES'] = '7'
-
-    # args.sample_path = glob(os.path.join('/data/yoongidata/temp/data/me_github/musdb18/train', '*.stem.mp4'))[0]
-    # args.eval_mode = 'sample'
-    
     cfg = importlib.import_module(f'configs.{args.configs}').Configs
-    # if args.eval_mode == 'musdb':
     evaluate_samples(configs=cfg, args=args)

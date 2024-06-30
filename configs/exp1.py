@@ -10,17 +10,12 @@ class Configs:
     rir_path = opj(data_rootdir, 'reverb_samples_16000_hz.npz')
     noise_path = opj(data_rootdir, 'noise_samples_47555_length_16000_hz.npz')
     
-    # for training exp
-    # rir_path = '/data/yoongidata/temp/data/dns_rir/impulse_responses/reverb_samples_16000_hz.npz'
-
     save_dir = './results/exp1'
     
     audio_length = 47555
     batch_size = 16
     
-    # model_type = 'CPq'
     n_conformers = 3
-    # n_conformers = 2
     n_fft = 1024
     win_len=1024
     hop_len=256
