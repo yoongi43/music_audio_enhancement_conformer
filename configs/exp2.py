@@ -4,14 +4,12 @@ import os; opj = os.path.join
 class Configs:
     gpus = '6, 7'
     dataset = 'musdb' # or 'solo'
-    data_rootdir = '/data/yoongidata/temp/data/me_github'
+    data_rootdir = '/path/to/data/dirs/'
     dataset_medleydbsolos_path = opj(data_rootdir, 'medley-solos-db')
     dataset_musdb_path = opj(data_rootdir, 'musdb18')
     rir_path = opj(data_rootdir, 'reverb_samples_16000_hz.npz')
     noise_path = opj(data_rootdir, 'noise_samples_47555_length_16000_hz.npz')
     
-    # for training exp
-    # rir_path = '/data/yoongidata/temp/data/dns_rir/impulse_responses/reverb_samples_16000_hz.npz'
 
     save_dir = './results/exp2'
     

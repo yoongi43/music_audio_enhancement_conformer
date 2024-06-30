@@ -4,7 +4,7 @@ import os; opj = os.path.join
 class Configs:
     gpus = '6, 7'
     dataset = 'musdb' # or 'solo'
-    data_rootdir = '/data/yoongidata/temp/data/me_github'
+    data_rootdir = '/path/to/data/dirs/'
     dataset_medleydbsolos_path = opj(data_rootdir, 'medley-solos-db')
     dataset_musdb_path = opj(data_rootdir, 'musdb18')
     rir_path = opj(data_rootdir, 'reverb_samples_16000_hz.npz')

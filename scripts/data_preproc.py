@@ -6,15 +6,14 @@ Using downloaded data, split into training, validation, and test sets
             - https://zenodo.org/records/6257551/files/ACE_Corpus_RIRN_Single.tbz2?download=1
     - RIR: DNS Challenge
         - git clone https://github.com/microsoft/DNS-Challenge
-        - rir만 선택
-        - download 
-        => SLR26에서 medium room, small room 만 사용
     - Medley-db solos
         - https://zenodo.org/records/1344103#.Yg__Yi-B1QI
     - Musdb18
         - https://zenodo.org/records/1117372
-2. - noise: babble, ambient만 선택해서 따로 분ㄹ
-    - rir: medium-room, small-room 만 가져오기
+2. Noise: We only use babble and ambient noise from ACE dataset
+3. Reverb: We only use smallroom and mediumroom from SLR26
+
+
 """
 ## Source: https://github.com/nkandpa2/music_enhancement/tree/master
 ## Process and split data
@@ -34,16 +33,19 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data-dir-rir', 
                         type=str,
-                        default='/data/yoongidata/temp/data/me_github/SLR26/',
-                        help='path to rir data (SLR26)')
+                        default=None,
+                        help = 'path to rir dataset. i.e., .../SLR26/')
     parser.add_argument('--data-dir-noise',
                         type=str,
-                        default='/data/yoongidata/temp/data/me_github/Single/',
-                        help='path to noise data (ACE)')
+                        default = None,
+                        help='path to noise data (ACE). i.e., .../Single/')
+
     parser.add_argument('--output-dir', 
                         type=str,
-                        default='/data/yoongidata/temp/data/me_github/',
+                        default=None,
                         help='path to output directory to save the processed npz files')
+
+
     parser.add_argument('--sample-rate', type=int, default=16000, help='sample rate')
     parser.add_argument('--sample-length', type=int, default=47555, help='length to cut noise samples to')
     parser.add_argument('--valid-fraction', type=float, default=0.1, help='fraction of data to reserve for validation')
@@ -71,7 +73,6 @@ def process_rir(data_dir_rir, sample_rate:int, valid_fraction, test_fraction, sa
     out_file = f'reverb_samples_{sample_rate}_hz.npz'
     train, valid, test = split_from_data(dataset.data, valid_fraction, test_fraction)
     np.savez(os.path.join(save_root_dir, out_file), training=train, validation=valid, test=test)
-    
 
 
 def process_noise(data_dir_noise, sample_length, sample_rate, valid_fraction, test_fraction, save_root_dir):
