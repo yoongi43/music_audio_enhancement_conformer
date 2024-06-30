@@ -39,6 +39,8 @@ This repository is the implementation of the paper "Exploiting Time-Frequency Co
 - python main.py --configs exp2
 
 ## Inference MUSDB18
+Checkpoints are contained in the 'results' directory.
+
 `python evaluate.py --configs exp2 --eval-mode musdb --save-dir path/to/save/`
 
 ## Inference an audio file
