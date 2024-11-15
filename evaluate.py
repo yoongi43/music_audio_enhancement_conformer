@@ -177,10 +177,16 @@ def evaluate_samples(configs, args):
     
     configs.audio_length = (configs.audio_length//256)*256
     
-    test_reverb = ReverbDataset(configs.rir_path, split='test')
-    test_noise = NoiseDataset(configs.noise_path, split='test', sample_length=configs.audio_length)
-    reverb_loader = iter(DataLoader(test_reverb, batch_size=1, shuffle=False))
-    noise_loader = iter(DataLoader(test_noise, batch_size=1, shuffle=False))
+    augment = True if args.eval_mode == 'musdb' else False
+
+    if augment:
+        test_reverb = ReverbDataset(configs.rir_path, split='test')
+        test_noise = NoiseDataset(configs.noise_path, split='test', sample_length=configs.audio_length)
+        reverb_loader = iter(DataLoader(test_reverb, batch_size=1, shuffle=False))
+        noise_loader = iter(DataLoader(test_noise, batch_size=1, shuffle=False))
+    else:
+        reverb_loader = None
+        noise_loader = None
     
     eq_model = augmentation.MicrophoneEQ(rate=configs.sr).to(device)
     low_cut_filter = augmentation.LowCut(cutoff_freq=35, rate=configs.sr).to(device)
