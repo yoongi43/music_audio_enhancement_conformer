@@ -214,6 +214,12 @@ def evaluate_samples(configs, args):
                 audio_batch.append(audio)
         else:
             audio, rate = ta.load(path)
+
+            if rate != configs.sr:
+                resampler = T.Resample(orig_freq=rate, new_freq=configs.sr)
+                audio = resampler(audio)
+                # print(f"Resampled audio from {rate} Hz to {configs.sr} Hz")
+            
             audio = audio.mean(0, keepdim=True)
             audio_batch.append(audio)
             # import pdb; pdb.set_trace()
